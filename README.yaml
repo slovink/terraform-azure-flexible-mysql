@@ -1,0 +1,64 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name : TERRAFORM AZURE FLEXIBLE MYSQL
+
+# License of this project
+license: "APACHE"
+
+# Canonical GitHub repo
+github_repo: git@github.com:slovink/terraform-azure-flexible-mysql
+
+# Badges to display
+badges:
+  - name: "Terraform"
+    image: "https://img.shields.io/badge/Terraform-v1.7.4-green"
+    url: "https://www.terraform.io"
+  - name: "Licence"
+    image: "https://img.shields.io/badge/License-APACHE-blue.svg"
+    url: "https://github.com/slovink/terraform-azure-flexible-mysql/blob/master/LICENSE"
+
+#  description of this project
+description: |-
+  Terraform module to create Azure flexible musql service resource on AZURE.
+# extra content
+include:
+  - "terraform.md"
+
+# How to use this project
+# How to use this project
+usage: |-
+  Here are some examples of how you can use this module in your inventory structure:
+  ### azure flexible mysql
+  ```hcl
+    # Basic
+   module "flexible-mysql" {
+   depends_on          = [module.resource_group, module.vnet]
+   source              = "../../"
+   name                = local.name
+   environment         = local.environment
+   resource_group_name = module.resource_group.resource_group_name
+   location            = module.resource_group.resource_group_location
+   virtual_network_id  = module.vnet.id
+   delegated_subnet_id = [module.subnet.default_subnet_id][0]
+   mysql_version       = "8.0.21"
+   private_dns         = true
+   zone                = "1"
+   admin_username      = "mysqlusername"
+   admin_password      = "ba5yatgfgfhdsv6A3ns2lu4gqzzc"
+   sku_name            = "GP_Standard_D8ds_v4"
+   db_name             = "maindb"
+   charset             = "utf8mb3"
+   collation           = "utf8mb3_unicode_ci"
+   auto_grow_enabled   = true
+   iops                = 360
+   size_gb             = "20"
+   #azurerm_mysql_flexible_server_configuration
+   server_configuration_names = ["interactive_timeout", "audit_log_enabled"]
+   values                     = ["600", "ON"]
+  }
+  ```

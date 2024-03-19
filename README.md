@@ -1,4 +1,23 @@
-# terraform-azure-flexible-mysql
+ <p align="center"> <img src="https://user-images.githubusercontent.com/50652676/62349836-882fef80-b51e-11e9-99e3-7b974309c7e3.png" width="100" height="100"></p>
+
+
+<h1 align="center">
+    Terraform Azure Flexible Mysql
+</h1>
+
+<p align="center" style="font-size: 1.2rem;">
+    Terraform module to create Azure flexible mysql service resource on AZURE.
+     </p>
+
+<p align="center">
+
+<a href="https://www.terraform.io">
+  <img src="https://img.shields.io/badge/Terraform-v1.7.4-green" alt="Terraform">
+</a>
+<a href="https://github.com/slovink/terraform-azure-flexible-mysql/blob/master/LICENSE">
+  <img src="https://img.shields.io/badge/License-APACHE-blue.svg" alt="Licence">
+</a>
+
 # Terraform Azure Infrastructure
 
 This Terraform configuration defines an Azure infrastructure using the Azure provider.
@@ -26,7 +45,7 @@ for creating AZURE resources, and you can customize the inputs as needed. Below 
 ```hcl
 module "flexible-mysql" {
   depends_on          = [module.resource_group, module.vnet]
-  source              = "../../"
+  source              = "https://github.com/slovink/terraform-azure-flexible-mysql.git?ref=1.0.0"
   name                = local.name
   environment         = local.environment
   resource_group_name = module.resource_group.resource_group_name
@@ -55,7 +74,7 @@ module "flexible-mysql" {
 ```hcl
 module "flexible-mysql-replication" {
   depends_on                     = [module.resource_group, module.vnet, data.azurerm_resource_group.main]
-  source                         = "../../."
+  source                         = "https://github.com/slovink/terraform-azure-flexible-mysql.git?ref=1.0.0"
   name                           = local.name
   environment                    = local.environment
   main_rg_name                   = data.azurerm_resource_group.main.name
